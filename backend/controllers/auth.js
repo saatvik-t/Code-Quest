@@ -1,7 +1,7 @@
-const dotenv = require("dotenv");
-const User = require("../models/User");
-const bcrypt = ("bcryptjs");
-const jwt = ("jsonwebtoken");
+import dotenv from 'dotenv';
+import User from '../models/user.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 dotenv.config({ path: '../.env' });
 

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const TestCaseSchema = new mongoose.Schema({
     problemId: {
@@ -21,4 +21,4 @@ const TestCaseSchema = new mongoose.Schema({
 });
 
 const TestCase = mongoose.model('TestCase', TestCaseSchema);
-module.exports = TestCase;
+export default TestCase;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const problemSchema = new mongoose.Schema({
     title: {
@@ -12,4 +12,4 @@ const problemSchema = new mongoose.Schema({
 });
 
 const Problem = mongoose.model('Problem', problemSchema);
-module.exports = Problem;
+export default Problem;
