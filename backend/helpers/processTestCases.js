@@ -8,7 +8,7 @@ import executeCpp from './executeCpp.js';
 const processTestCases = async (language, codeFilePath, problemId) => {
     const testCases = await TestCase.find({ problemId }).sort({ title: 1 });
     let results = [];
-    if (! testCases || testCases.length === 0) {
+    if(! testCases || testCases.length === 0) {
         return "Unable to provide a Verdict - No Test Case Found";
     }
 
@@ -17,29 +17,29 @@ const processTestCases = async (language, codeFilePath, problemId) => {
         let compileResult;
         try {
             const inputFilePath = await generateInputFile(input);
-            switch (language) {
+            switch(language) {
                 case 'java':
-                    compileResult = await executeJava(codeFilePath, inputFilePath)
-                    break
+                    compileResult = await executeJava(codeFilePath, inputFilePath);
+                    break;
                 case 'py':
-                    compileResult = await executePy(codeFilePath, inputFilePath)
-                    break
+                    compileResult = await executePy(codeFilePath, inputFilePath);
+                    break;
                 case 'cpp':
-                    compileResult = await executeCpp(codeFilePath, inputFilePath)
-                    break
+                    compileResult = await executeCpp(codeFilePath, inputFilePath);
+                    break;
             }
-            console.log('Result of compilation', compileResult);
+            console.log('Result of Compilation : ', compileResult);
             const isCorrect = compileResult.output.trim() === expectedOutput.trim();
 
             let message = '';
 
-            if (compileResult.feedback === 'Compilation Error' && ! isCorrect) {
+            if(compileResult.feedback === 'Compilation Error' && ! isCorrect) {
                 message = compileResult.feedback;
             }
-            else if (compileResult.feedback === 'Runtime Error' && ! isCorrect) {
+            else if(compileResult.feedback === 'Runtime Error' && ! isCorrect) {
                 message = compileResult.feedback;
             } 
-            else if (compileResult.feedback === 'Compiled Successfully' && ! isCorrect) {
+            else if(compileResult.feedback === 'Compiled Successfully' && ! isCorrect) {
                 message = `Failed Test Case ${index + 1}`;
             } 
             else {
@@ -56,7 +56,7 @@ const processTestCases = async (language, codeFilePath, problemId) => {
                 isCorrect
             })
 
-            if (! isCorrect) {
+            if(! isCorrect) {
                 break;
             }
         } 
@@ -67,7 +67,7 @@ const processTestCases = async (language, codeFilePath, problemId) => {
                 expectedOutput,
                 userOutput: error.message || error.output,
                 runtime: error.runtime || 0,
-                description: error.feedback || 'There is an error in your Code',
+                description: error.feedback || 'There is an Error in your Code',
                 isCorrect: false
             })
             break;
