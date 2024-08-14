@@ -8,27 +8,35 @@ const judge = async (req, res) => {
     const { language = 'java', code, problemId } = req.body;
     const userId = req.user;
 
+    console.log("Inside controllers/judge.js");
+
     if(! code || typeof code !== 'string' || code.trim() === '') {
         return res.json({ verdict: 'Verdict not availabe - Code Missing', results: [] });
     }
 
     try {
         const codeFilePath = await generateFile(language, code);
+        console.log("Generated the Code file : ", codeFilePath);
         const { success, results } = await processTestCases(language, codeFilePath, problemId);
-
+        console.log("Processed the Test Cases");
+        console.log("Success : ", success);
+        console.log("Results : ", results);
         const user = await User.findById(userId);
 
         const problem = await Problem.findById(problemId);
 
         if(! user || ! problem) {
+            console.log("User or Testcase not found");
             return res.status(500).json({ success: false, results: ["User or Problem not found"] });
         }
         const problemTitle = problem.title;
+
         const verdict = success ? 'Accepted' : results[results.length - 1].description;
 
         const totalRuntime = results.reduce((sum, result) => sum + result.runtime, 0);
 
         const averageRuntime = totalRuntime / results.length;
+
         let newLanguage;
         switch (language) {
             case 'java':
@@ -41,6 +49,7 @@ const judge = async (req, res) => {
                 newLanguage = 'C++'
                 break
         }
+
         const newSubmission = new Submission({
             userId,
             problemTitle,

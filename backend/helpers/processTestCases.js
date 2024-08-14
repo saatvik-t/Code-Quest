@@ -6,7 +6,9 @@ import executeCpp from './executeCpp.js';
 
 
 const processTestCases = async (language, codeFilePath, problemId) => {
-    const testCases = await TestCase.find({ problemId }).sort({ title: 1 });
+    console.log("Inside helpers/processTestCases.js");
+    const testCases = await TestCase.find({ 'problemId': problemId }).sort({ title: 1 });
+    console.log("Testcases : ", testCases);
     let results = [];
     if(! testCases || testCases.length === 0) {
         return "Unable to provide a Verdict - No Test Case Found";
@@ -14,9 +16,11 @@ const processTestCases = async (language, codeFilePath, problemId) => {
 
     for (const [index, testcase] of testCases.entries()) {
         const { title, input, expectedOutput } = testcase;
+        console.log(title, " ", input, " ", expectedOutput);
         let compileResult;
         try {
             const inputFilePath = await generateInputFile(input);
+            console.log("Input File Path : ", inputFilePath);
             switch(language) {
                 case 'java':
                     compileResult = await executeJava(codeFilePath, inputFilePath);
