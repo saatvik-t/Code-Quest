@@ -7,9 +7,17 @@ import { runRouter } from './routes/run.js';
 import { submissionRouter } from './routes/submissions.js';
 import DBConnection from './database/db.js';
 import cookieParser from 'cookie-parser';
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 dotenv.config();
 const port = process.env.PORT || 8000;
+const ORIGIN = process.env.ORIGIN
+
+const corsOptions = {
+    origin: ORIGIN,
+    credentials: true,
+}
 
 const app = express();
 app.use(express.json());
@@ -24,6 +32,14 @@ app.use('/submissions', submissionRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World !')
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'))
 });
 
 DBConnection().then(() => {
