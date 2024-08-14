@@ -19,6 +19,14 @@ export const WelcomePage = () => {
         <>
             <div className='min-h-screen flex flex-col'>
                 <nav className='bg-gray-500 text-white p-4 flex justify-between items-center'>
+                    <div className='flex space-x-4'>
+                        <Link
+                            to='/profile'
+                            className='hover:underline'
+                        >
+                            Profile
+                        </Link>
+                    </div>
                     <button
                         onClick={logoff}
                         className='bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded'

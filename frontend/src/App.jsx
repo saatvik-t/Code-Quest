@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import Unauthorized from './components/Unauthorized'
-import Missing from './components/Missing'
 import RegistrationForm from './components/RegistrationForm'
 import LoginForm from './components/LoginForm'
+import Unauthorized from './components/Unauthorized'
+import Missing from './components/Missing'
 import { WelcomePage } from './components/Welcome'
+import Profile from './components/Profile'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
         <Route element={<RequireAuth />}>
           <Route path="/" element={<WelcomePage />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
 
         <Route path="*" element={<Missing />} />
