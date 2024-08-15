@@ -10,6 +10,7 @@ const axios_options = { headers: { 'Content-Type': 'application/json' }, withCre
 
 export const register = async (formData) => {
     const response = await axios.post(REGISTER_URL, JSON.stringify(formData), axios_options)
+    console.log('register', response)
     return response.data
 }
 

@@ -4,6 +4,7 @@ import RegistrationForm from './components/RegistrationForm'
 import LoginForm from './components/LoginForm'
 import Unauthorized from './components/Unauthorized'
 import Missing from './components/Missing'
+import RequireAuth from './components/RequireAuth'
 import { WelcomePage } from './components/Welcome'
 import Profile from './components/Profile'
 

@@ -7,22 +7,24 @@ import { runRouter } from './routes/run.js';
 import { submissionRouter } from './routes/submissions.js';
 import DBConnection from './database/db.js';
 import cookieParser from 'cookie-parser';
-import path from 'path'
-import { fileURLToPath } from 'url'
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
+const app = express();
 const port = process.env.PORT || 8000;
-const ORIGIN = process.env.ORIGIN
+const ORIGIN = process.env.ORIGIN;
 
 const corsOptions = {
-    origin: ORIGIN,
+    origin: ORIGIN || 'http://localhost:5173',
     credentials: true,
 }
 
-const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(cookieParser());
+app.use(cors(corsOptions))
 
 app.use('/auth', authRouter);
 app.use('/judge', judgeRouter);
