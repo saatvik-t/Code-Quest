@@ -26,6 +26,12 @@ export const WelcomePage = () => {
                         >
                             Profile
                         </Link>
+                        <Link
+                            to='/problems'
+                            className='hover:underline'
+                        >
+                            Problems
+                        </Link>
                     </div>
                     <button
                         onClick={logoff}
