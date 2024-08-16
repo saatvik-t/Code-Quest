@@ -32,6 +32,12 @@ export const WelcomePage = () => {
                         >
                             Problems
                         </Link>
+                        <Link
+                            to='/submissions'
+                            className='hover:underline'
+                        >
+                            Submissions
+                        </Link>
                     </div>
                     <button
                         onClick={logoff}
