@@ -20,13 +20,13 @@ function App() {
         <Route path="register" element={<RegistrationForm />} />
         <Route path="unauthorized" element={<Unauthorized />} />
         {/* private routes */}
-        {/* <Route element={<RequireAuth />}> */}
+        <Route element={<RequireAuth />}>
           <Route path="/" element={<WelcomePage />} />
           <Route path="profile" element={<Profile />} />
           <Route path="problems" element={<ProblemsPage />} />
           <Route path="problems/:id" element={<ProblemDetailPage />} />
           <Route path="submissions" element={<SubmissionsPage />} />
-        {/* </Route> */}
+        </Route>
         {/* Catch All */}
         <Route path="*" element={<Missing />} />
       </Route>

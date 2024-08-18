@@ -56,7 +56,6 @@ export const login = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.SAME_SITE
-            // https sameSite: 'none'  for cross-site
         };
 
         // Storing the JWT (important)
