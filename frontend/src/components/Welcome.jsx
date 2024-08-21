@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { logout } from "../services/authService";
+import Navbar from "./Navbar";
 import Spinner from "./Spinner";
 
-export const WelcomePage = () => {
+const WelcomePage = () => {
     const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -25,27 +26,7 @@ export const WelcomePage = () => {
     return (
         <>
             <div className='min-h-screen flex flex-col'>
-                <nav className='bg-gray-500 text-white p-4 flex justify-between items-center'>
-                    <div className='flex space-x-4'>
-                        <Link to='/profile' className='hover:underline'>
-                            Profile
-                        </Link>
-                        <Link to='/problems' className='hover:underline'>
-                            Problems
-                        </Link>
-                        <Link to='/submissions' className='hover:underline'>
-                            Submissions
-                        </Link>
-                    </div>
-                    <button
-                        onClick={logoff}
-                        disabled={loading}
-                        className='bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded'
-                    >
-                        {loading ? 'Logging Out...' : 'Logout'}
-                    </button>
-                </nav>
-
+                <Navbar />
                 <main className='flex-grow p-8'>
                     {loading ? (
                         <Spinner />
@@ -63,3 +44,5 @@ export const WelcomePage = () => {
         </>
     );
 };
+
+export default WelcomePage;
